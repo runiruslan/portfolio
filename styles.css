@@ -880,7 +880,7 @@ nav.active{
   position: relative;
   text-align: center;
   font-size: 28px;
-  height: 150px;          /* зона под круг */
+  height: 150px;          
   display: flex;
   align-items: center;
   justify-content: center;
@@ -918,7 +918,7 @@ nav.active{
     overflow-wrap: anywhere;
   }
 
-  /* ====== BUTTONS ====== */
+
   .buttons{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -926,7 +926,7 @@ nav.active{
     width: 100%;
     max-width: 420px;
     margin: 18px auto 0;
-    transform: translateY(100px);  /* меньше поднимаются */
+    transform: translateY(100px);  
     opacity: 0;
     margin-top: 12px;
   }
@@ -946,12 +946,11 @@ nav.active{
     border-radius: 10px;
   }
 
-  /* ускоряем анимацию только на мобиле */
+
   .buttons.slideSideAnimation{
     animation-duration: 2s;
   }
 
-  /* ====== SERVICES ====== */
   .cards{
     grid-template-columns: 1fr;
     gap: 20px;
@@ -970,7 +969,6 @@ nav.active{
 
   .cards div h1{ margin-top: -10px; }
 
-  /* ====== MYWORKS ====== */
   #myworks{
     padding: 60px 16px;
     height: auto;
@@ -1000,7 +998,6 @@ nav.active{
     grid-row: auto;
   }
 
-  /* ====== CONTACT ====== */
   #contact{ padding: 60px 16px; }
 
   .contact_head{ margin-bottom: 32px; }
