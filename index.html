@@ -108,30 +108,37 @@
 
   <div class="awesome_filters" role="tablist" aria-label="Portfolio filters">
     <button class="filter_btn active" data-filter="all" type="button">All</button>
-    <button class="filter_btn" data-filter="branding" type="button">Branding Goals</button>
-    <button class="filter_btn" data-filter="photo" type="button">Photography</button>
-    <button class="filter_btn" data-filter="ui" type="button">True Perfection</button>
-    <button class="filter_btn" data-filter="web" type="button">Web Design</button>
+    <button class="filter_btn" data-filter="client" type="button">Client Projects</button>
+    <button class="filter_btn" data-filter="web-design" type="button">Web Design</button>
+    <button class="filter_btn" data-filter="web-app" type="button">Web Apps</button>
   </div>
 
   <div id="works_grid" class="works_grid">
 
-    <a class="work_item big" href="https://artfixbouw.nl/" target="_blank" rel="noopener noreferrer" data-category="web">
+    <a class="work_item big" href="https://artfixbouw.nl/" target="_blank" rel="noopener noreferrer" data-category="client web-design hosting">
       <img src="./images/artfixbouw.png" alt="ArtFix Bouw website">
       <span class="work_overlay">
         <span class="work_title">ArtFix Bouw</span>
-        <span class="work_tag">Web Design</span>
+        <span class="work_tag">Web Design & Hosting</span>
       </span>
     </a>
 
-<a class="work_item big" href="https://runiruslan.github.io/calculator/" target="_blank" data-category="web">
+    <a class="work_item big" href="https://runiruslan.github.io/kristina/" target="_blank" rel="noopener noreferrer" data-category="client web-design">
+      <img src="./images/kristina.png" alt="Kristina interior design portfolio">
+      <span class="work_overlay">
+        <span class="work_title">Kristina</span>
+        <span class="work_tag">Designer Client Portfolio</span>
+      </span>
+    </a>
+
+<a class="work_item big" href="https://runiruslan.github.io/calculator/" target="_blank" data-category="web-app">
       <img src="./images/calculator.png" alt="Project 1">
       <span class="work_overlay">
       <span class="work_title">Calculator</span>
       </span>
     </a>
 
-<a class="work_item big" href="https://runiruslan.github.io/enter/" target="_blank" data-category="web">
+<a class="work_item big" href="https://runiruslan.github.io/enter/" target="_blank" data-category="web-design web-app">
       <img src="./images/enter.png" alt="Project 4">
       <span class="work_overlay">
         <span class="work_title">Sign In / Sign Up</span>
@@ -139,7 +146,7 @@
       </span>
     </a>
 
-<a class="work_item big" href="https://runiruslan.github.io/notes/" target="_blank" data-category="web">
+<a class="work_item big" href="https://runiruslan.github.io/notes/" target="_blank" data-category="web-app">
       <img src="./images/notes.png" alt="Project 2">
       <span class="work_overlay">
         <span class="work_title">Notes</span>
@@ -147,7 +154,7 @@
       </span>
     </a>
 
-<a class="work_item big" href="https://runiruslan.github.io/grading/" target="_blank" data-category="web">
+<a class="work_item big" href="https://runiruslan.github.io/grading/" target="_blank" data-category="web-app">
       <img src="./images/grading.png" alt="Project 3">
       <span class="work_overlay">
         <span class="work_title">Grading</span>
@@ -304,9 +311,10 @@ filterButtons.forEach(btn => {
     // после исчезновения перестраиваем и показываем нужные
     setTimeout(() => {
       const show = [], hide = [];
-      items.forEach(el =>
-        (filter === "all" || el.dataset.category === filter ? show : hide).push(el)
-      );
+      items.forEach(el => {
+        const categories = (el.dataset.category || "").split(" ");
+        (filter === "all" || categories.includes(filter) ? show : hide).push(el);
+      });
 
       [...show, ...hide].forEach(el => grid.appendChild(el));
       show.forEach(el => {
