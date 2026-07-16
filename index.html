@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
     <title>Portfolio</title>
 </head>
 <body>
-    <nav id="nav">
-      <a href="/" class="logo">
-        <img class="logo" src="./images/imglogo.png" alt="">
-      </a>
-        <button class="burger" id="burger">
-          ☰
-        </button>
-        <div id="navigation" class="navigation">
-            <a href="#home">Home</a>
-            <a href="#about">About Me</a>
-            <a href="#services">Services</a>
-            <a href="#myworks">My works</a>
-            <a href="#contact">Contact</a>
-        </div>
+  <nav id="nav">
+    <a href="/" class="logo">
+      <img class="logo" src="./images/imglogo.png" alt="">
+    </a>
+      <button class="burger" id="burger" type="button" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="burger_icon" aria-hidden="true"></span>
+      </button>
+      <div id="navigation" class="navigation">
+        <a href="#home">Home</a>
+        <a href="#about">About Me</a>
+        <a href="#services">Services</a>
+        <a href="#myworks">My works</a>
+        <a href="#contact">Contact</a>
+      </div>
     </nav>
 
 
@@ -46,26 +49,28 @@
 
         <section id="about">
 
-            <div class="circle">
+            <div class="circle_wrapper">
+              <div class="circle_text">
                 About me
+              </div>
             </div>
-        <div class="me_info">
-            <div class="me_text"> 
-                <p class="default_text"> My name is Ruslan, and I am a junior web developer focused on creating clean, responsive, and user-friendly websites.
-  I enjoy building modern interfaces and making sure they work smoothly across different devices.</p>
+          <div class="me_info">
+              <div class="me_text">
+                  <p class="default_text"> My name is Ruslan, and I am a junior web developer focused on creating clean, responsive, and user-friendly websites.
+    I enjoy building modern interfaces and making sure they work smoothly across different devices.</p>
 
-                <p class="default_text">I pay attention to layout, typography, and small UI details, and I value clear, well-structured code.
-  I am motivated to learn, grow as a developer, and work on real projects that bring ideas to life.</p>
-            </div>
+                  <p class="default_text">I pay attention to layout, typography, and small UI details, and I value clear, well-structured code.
+    I am motivated to learn, grow as a developer, and work on real projects that bring ideas to life.</p>
+              </div>
 
-            <div class="buttons">
-                <a href="#myworks" class="main_button">View works</a>
-                <a class="secondary_button" id="downloadCV" href="./images/Lebenslauf (2).pdf" download>
-  Download CV
-</a>
-            </div>
+              <div class="buttons">
+                  <a href="#myworks" class="main_button">View works</a>
+                  <a class="secondary_button" id="downloadCV" href="./images/Lebenslauf (2).pdf" download>
+    Download CV
+  </a>
+              </div>
 
-        </div>
+          </div>
         </section>
 
 
@@ -185,7 +190,7 @@
 
       <div class="contact_item">
         <span class="ci_icon">✉️</span>
-        <a href="mailto:yourmail@gmail.com">ruslan06runi@gmail.com</a>
+        <a href="mailto:ruslan06runi@gmail.com">ruslan06runi@gmail.com</a>
       </div>
 
       <div class="contact_item">
@@ -256,7 +261,8 @@
 </section>
 
 
-    <script>
+
+<script>
 
         const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -351,7 +357,7 @@ filterButtons.forEach(btn => {
 
 
         
-    </script>
+  </script>
 
 
 <script>
@@ -395,9 +401,35 @@ filterButtons.forEach(btn => {
   const burger = document.getElementById('burger');
   const navigation = document.getElementById('navigation');
   const nav = document.getElementById('nav');
+
+  const isMenuLayout = () =>
+    window.innerWidth <= 760 ||
+    window.matchMedia('(min-width: 761px) and (max-width: 1100px) and (orientation: portrait)').matches;
+
+  const setNavigationOpen = (open) => {
+    const shouldOpen = Boolean(open && isMenuLayout());
+    navigation.classList.toggle('active', shouldOpen);
+    nav.classList.toggle('active', shouldOpen);
+    burger.setAttribute('aria-expanded', String(shouldOpen));
+  };
+
   burger.addEventListener('click', () => {
-    navigation.classList.toggle('active');
-    nav.classList.toggle('active');
+    setNavigationOpen(burger.getAttribute('aria-expanded') !== 'true');
+  });
+
+  navigation.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => setNavigationOpen(false));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true') {
+      setNavigationOpen(false);
+      burger.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (!isMenuLayout()) setNavigationOpen(false);
   });
 
 
